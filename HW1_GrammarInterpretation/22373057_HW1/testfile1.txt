@@ -1,0 +1,159 @@
+const int const_int_var_1 = 0;
+const int const_int_var_2 = 0, const_int_var_3 = 1;
+
+
+const int global_var1[10] = {1,2,3,4,5,6,7,8,9,-1};
+const char str[4]="str";
+
+const char const_char_var_1 = 'a';
+
+int int_var_1=1;
+int int_var_5=4,int_var_6='c';
+int int_var_2, int_var_3;
+int int_var_4;
+char hello[6] = "hello";
+
+void f1(){
+
+}
+void f1_1(){
+    return;
+}
+int f2(int a){
+    int b;
+    b = 1;
+    return b;
+}
+int f2_2(int a,int b){
+    return 1;
+}
+int f2_3(int a[],char c){
+    return 1;
+}
+char f3(int b){
+    return 'a';
+}
+
+int f5(){
+    return 0;
+}
+
+
+int add(int p1, int p2) {
+    int p3;
+    p3 = p1 + p2;
+    return p3;
+}
+
+
+int unary_ops() {
+    int a = +5, b = -a, c = !0;  
+    int d;
+    d = a *b / 2 % 2; 
+    return 0;
+}
+
+int relational_and_logical() 
+{
+    int a = 5, b = 3;
+    char c = 'A', d = 'B';
+    int result=0;
+    if(a>b && c=='A'){
+        result = result + 1;
+    }
+    if(a<b || d!='B'){
+        result = result + 1;
+    }
+    if(a<=b){
+        result=result+1;
+    }
+    if(a>=b){
+        result=result+1;
+    }
+    return result;
+}
+
+
+int main(){
+    int t[5] = {1, 2, 3, 4, 5};
+    int t1[3];
+    int a;
+    a = getint();
+    char ch;
+    ch = getchar();
+    int i=0;
+    if (i < 5) {
+        i = i + 1;
+    } 
+    else {
+        i = i - 1;
+    }
+    for (;; i=i+1) { 
+        if (i > 6) break;
+    }
+    int k = 0;
+    for (k = 0; k < 3;k=k+1){
+        
+    }
+    for (; k < 5;k=k+1){
+
+    }
+    int m = 0;
+    for (m = 0;; m = m + 1)
+    { 
+        if (m > 2) break;
+    }
+
+    int n;
+    for (n = 0; n < 10; n = n + 1)
+    {
+        if (n == 5) break;
+        if (n == 2) continue;
+    }
+    for(n=0;;){
+        break;
+    }
+    for(;n<0;){
+        break;
+    }
+    for(n=0;n>=0;){
+        break;
+    }
+    for(;;n=n+1){
+        break;
+    }
+    if(1){
+
+    }
+    if('a'){
+
+    }
+    if((1+1)){
+
+    }
+    n=1;
+    t[0]=1;
+    n=n+1;
+    n=n-1;
+    n=n*1;
+    n=n/1;
+    f1_1();
+    n=f5();
+    n=f2_2(1,1);
+    ch=f3(t[1]);
+    n=f2(1);
+    for(;;){
+        break;
+    }
+    printf("22373057\n");
+    n=1;
+    printf("%d\n",n);
+    printf("2\n");
+    printf("3\n");
+    printf("4\n");
+    printf("5\n");
+    printf("6\n");
+    printf("7\n");
+    printf("8\n");
+    printf("all done");
+}

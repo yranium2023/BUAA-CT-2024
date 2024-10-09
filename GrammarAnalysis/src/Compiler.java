@@ -1,5 +1,6 @@
 import frontend.Error.ErrorHandler;
 import frontend.Lexer.Lexer;
+import frontend.Parser.Parser;
 
 import java.io.*;
 
@@ -10,10 +11,10 @@ import java.io.*;
  */
 public class Compiler {
     public static void main(String[] args) throws IOException{
-        String inputFileName="testfile.txt";
-        String outputFileName="lexer.txt";
-        String errorFileName="error.txt";
-        String parserFileName="parser.txt";
+        String inputFileName = "testfile.txt";
+        String outputFileName = "lexer.txt";
+        String errorFileName = "error.txt";
+        String parserFileName = "parser.txt";
         BufferedReader stdin = new BufferedReader(new InputStreamReader(new FileInputStream(inputFileName)));
         BufferedWriter stdout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName)));
         BufferedWriter stderr = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(errorFileName)));
@@ -21,6 +22,7 @@ public class Compiler {
         Lexer lexer = new Lexer(stdin,stdout);
         lexer.file2lex();
         lexer.output();
+        Parser parser = new Parser(lexer,stdPar);
         ErrorHandler.getInstance().printErr(stderr);
         stdin.close();
         stdout.close();

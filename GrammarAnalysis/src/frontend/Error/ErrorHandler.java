@@ -28,7 +28,7 @@ public class ErrorHandler {
 
     public void printErr(BufferedWriter stderr) throws IOException {
         for(Error error:errorList){
-            stderr.write(error.lineNum +" "+error.errorType+"\n");
+            stderr.write(error.toString());
         }
     }
 }

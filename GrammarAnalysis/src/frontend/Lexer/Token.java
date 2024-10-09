@@ -9,7 +9,7 @@ public class Token {
     private int lineNum;
     private String strValue;
     private LexType type;
-    private long intValue;
+//    private long intValue;
 
     public Token(int lineNum, LexType type) {
         this.lineNum = lineNum;
@@ -22,11 +22,11 @@ public class Token {
         this.type = type;
     }
 
-    public Token(int lineNum, LexType type, long num) {
-        this.lineNum = lineNum;
-        this.type = type;
-        this.intValue = num;
-    }
+//    public Token(int lineNum, LexType type, long num) {
+//        this.lineNum = lineNum;
+//        this.type = type;
+//        this.intValue = num;
+//    }
 
 
     public int getLineNum() {

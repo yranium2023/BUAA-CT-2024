@@ -14,4 +14,8 @@ public class Error {
         this.lineNum = lineNum;
     }
 
+    @Override
+    public String toString() {
+        return this.lineNum +" "+this.errorType+"\n";
+    }
 }

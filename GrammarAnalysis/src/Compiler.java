@@ -1,4 +1,5 @@
 import frontend.Error.ErrorHandler;
+import frontend.Global;
 import frontend.Lexer.Lexer;
 import frontend.Parser.Parser;
 
@@ -22,7 +23,7 @@ public class Compiler {
         Lexer lexer = new Lexer(stdin,stdout);
         lexer.file2lex();
         lexer.output();
-        Parser parser = new Parser(lexer,stdPar);
+        Global.parser = new Parser(lexer,stdPar);
         ErrorHandler.getInstance().printErr(stderr);
         stdin.close();
         stdout.close();

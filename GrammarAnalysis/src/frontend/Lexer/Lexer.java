@@ -207,7 +207,7 @@ public class Lexer {
 //                outputWriter.write(Token.getInstance().getLexCode(String.valueOf(ch)+ch));
             }else{
                 curPos--;
-//                tokenList.add(new Token(curLineNum,str2lex.get(String.valueOf(ch))));
+                tokenList.add(new Token(curLineNum,str2lex.get(String.valueOf(ch)+ch)));
 //                outputWriter.write(Token.getInstance().getLexCode(ch));
                 ErrorHandler.getInstance().addError(new Error(ErrorType.ILLEGAL_CHAR,curLineNum));
             }

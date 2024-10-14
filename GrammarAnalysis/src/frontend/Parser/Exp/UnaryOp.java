@@ -1,5 +1,9 @@
 package frontend.Parser.Exp;
 
+import frontend.Global;
+import frontend.Lexer.LexType;
+import frontend.Lexer.Token;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -7,4 +11,23 @@ package frontend.Parser.Exp;
  * @date 2024/10/9 21:14
  */
 public class UnaryOp {
+    private Token op=null;
+    private static UnaryOp instance=new UnaryOp();
+    private UnaryOp(){
+
+    }
+    public static UnaryOp getInstance(){
+        return instance;
+    }
+    public UnaryOp parseUnaryOp(){
+        UnaryOp unaryOp=new UnaryOp();
+        Token token= Global.parser.getNextToken();
+        if(!(token.getType().equals(LexType.PLUS) ||
+                token.getType().equals(LexType.MINU) ||
+                token.getType().equals(LexType.NOT))){
+            System.out.println("EXPECT UNARYOP HERE");
+        }
+        unaryOp.op=token;
+        return unaryOp;
+    }
 }

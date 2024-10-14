@@ -1,5 +1,11 @@
 package frontend.Parser.Func;
 
+import frontend.Global;
+import frontend.Lexer.LexType;
+import frontend.Lexer.Token;
+import frontend.Parser.Decl.BType;
+import frontend.Parser.Statement.Block;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -8,4 +14,25 @@ package frontend.Parser.Func;
  * @date 2024/10/9 21:12
  */
 public class FuncFParam {
+    private BType bType=null;
+    private Token ident=null;
+    private Token leftBracket=null;
+    private Token rightBracket=null;
+    private FuncFParam(){
+
+    }
+    private static FuncFParam instance=new FuncFParam();
+    public static FuncFParam getInstance(){
+        return instance;
+    }
+    public FuncFParam parseFuncFParam(){
+        FuncFParam funcFParam=new FuncFParam();
+        funcFParam.bType=BType.getInstance().parseBtype();
+        funcFParam.ident= Global.parser.match(LexType.IDENFR);
+        if(Global.parser.preReadToken().getType().equals(LexType.LBRACK)){
+            funcFParam.leftBracket=Global.parser.getNextToken();
+            funcFParam.rightBracket=Global.parser.match(LexType.RBRACK);
+        }
+        return funcFParam;
+    }
 }

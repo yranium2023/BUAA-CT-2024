@@ -28,8 +28,9 @@ public class Decl {
         if(token.getType().equals(LexType.CONSTTK)){
             decl.constDecl=ConstDecl.getInstance().parseConstDecl();
         }else{
-
+            decl.varDecl=VarDecl.getInstance().parseVarDecl();
         }
+        return decl;
     }
 
 }

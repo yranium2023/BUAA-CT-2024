@@ -85,6 +85,15 @@ public class Parser {
             return null;
         }
     }
+    public static boolean isExp(Token token) {
+        return token.getType().equals(LexType.IDENFR)
+                || token.getType().equals(LexType.PLUS)
+                || token.getType().equals(LexType.MINU)
+                || token.getType().equals(LexType.NOT)
+                || token.getType().equals(LexType.LPARENT)
+                || token.getType().equals(LexType.INTCON)
+                || token.getType().equals(LexType.CHRCON);
+    }
     public void toParser(){
         CompUnit compUnit=new CompUnit();
     }

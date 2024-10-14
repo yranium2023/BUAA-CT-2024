@@ -7,6 +7,7 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 import frontend.Parser.Func.FuncRParams;
+import frontend.Parser.Parser;
 
 /**
  * @author 吴鹄远
@@ -34,7 +35,8 @@ public class UnaryExp {
     private boolean isPrimaryExpFirst(Token first){
         return first.getType().equals(LexType.LPARENT)
                 || first.getType().equals(LexType.IDENFR)
-                || first.getType().equals(LexType.INTCON);
+                || first.getType().equals(LexType.INTCON)
+                || first.getType().equals(LexType.CHRCON);
     }
     //判断是否为  Ident '(' [FuncRParams] ')'
     private boolean isIdentFirst(Token first,Token second){
@@ -46,14 +48,6 @@ public class UnaryExp {
         return first.getType().equals(LexType.PLUS)
                 || first.getType().equals(LexType.MINU)
                 || first.getType().equals(LexType.NOT);
-    }
-    private boolean isExp(Token token) {
-        return token.getType().equals(LexType.IDENFR)
-                || token.getType().equals(LexType.PLUS)
-                || token.getType().equals(LexType.MINU)
-                || token.getType().equals(LexType.NOT)
-                || token.getType().equals(LexType.LPARENT)
-                || token.getType().equals(LexType.INTCON);
     }
 
     public UnaryExp parseUnaryExp(){
@@ -67,7 +61,7 @@ public class UnaryExp {
             unaryExp1.leftParent =Global.parser.getNextToken();
             Token token=Global.parser.getNextToken();
             Global.parser.unReadPrevToken();
-            if(isExp(token)){
+            if(Parser.isExp(token)){
                 unaryExp1.funcRParams= FuncRParams.getInstance().parseFuncRParams();
             }
             unaryExp1.rightParent=Global.parser.match(LexType.RPARENT);

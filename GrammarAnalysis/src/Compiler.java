@@ -22,13 +22,13 @@ public class Compiler {
         BufferedWriter stdPar = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(parserFileName)));
         Lexer lexer = new Lexer(stdin,stdout);
         lexer.file2lex();
+        stdin.close();
         lexer.output();
+        stdout.close();
         Global.parser = new Parser(lexer,stdPar);
         Global.parser.toParser();
-        ErrorHandler.getInstance().printErr(stderr);
-        stdin.close();
-        stdout.close();
-        stderr.close();
         stdPar.close();
+        ErrorHandler.getInstance().printErr(stderr);
+        stderr.close();
     }
 }

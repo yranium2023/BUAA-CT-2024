@@ -137,8 +137,10 @@ public class Stmt {
             stmt.semicn=Global.parser.match(LexType.SEMICN);
             stmt.type=StmtType.Return;
         }else{
-            int index=Global.parser.getIndex();
+            int index=Global.parser.getIndex()+1;
+//            System.out.println(index);
             int assign=Global.parser.getAssignIndex();
+//            System.out.println(assign);
             if(assign>index){
                 stmt.lVal=LVal.getInstance().parseLVal();
                 stmt.assignToken=Global.parser.match(LexType.ASSIGN);

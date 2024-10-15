@@ -31,6 +31,7 @@ public class BlockItem {
         || token.getType().equals(LexType.CHARTK)){
             blockItem.decl=Decl.getInstance().parseDecl();
         }else{
+//            System.out.println(token.toString());
             blockItem.stmt=Stmt.getInstance().parseStmt();
         }
         return  blockItem;

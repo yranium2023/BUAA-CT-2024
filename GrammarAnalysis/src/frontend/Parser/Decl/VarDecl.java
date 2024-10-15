@@ -37,6 +37,7 @@ public class VarDecl {
         while(token.getType().equals(LexType.COMMA)){
             varDecl.commas.add(Global.parser.getNextToken());
             varDecl.varDefs.add(VarDef.getInstance().parseVarDef());
+            token=Global.parser.preReadToken();
         }
         varDecl.semicn=Global.parser.match(LexType.SEMICN);
         return varDecl;

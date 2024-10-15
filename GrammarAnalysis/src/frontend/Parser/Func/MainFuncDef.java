@@ -27,11 +27,13 @@ public class MainFuncDef {
         return instance;
     }
     public MainFuncDef parseMainFuncDef(){
+//        System.out.println("Parsing MainFuncDef");
         MainFuncDef mainFuncDef=new MainFuncDef();
         mainFuncDef.intToken= Global.parser.match(LexType.INTTK);
         mainFuncDef.mainToken=Global.parser.match(LexType.MAINTK);
         mainFuncDef.leftParent=Global.parser.match(LexType.LPARENT);
         mainFuncDef.rightParent=Global.parser.match(LexType.RPARENT);
+//        System.out.println("Parsing block");
         mainFuncDef.block=Block.getInstance().parseBlock();
         return mainFuncDef;
     }

@@ -16,7 +16,7 @@ import java.io.IOException;
  * @date 2024/10/9 21:14
  */
 public class UnaryExp {
-    private static final String name="<PrimaryExp>";
+    private static final String name="<UnaryExp>";
     private PrimaryExp primaryExp = null;
     private Token ident = null;
     private Token leftParent = null;

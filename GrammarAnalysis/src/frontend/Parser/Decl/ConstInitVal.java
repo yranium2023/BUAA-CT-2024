@@ -57,7 +57,9 @@ public class ConstInitVal {
     public void print() throws IOException {
         if(constExp!=null){
             constExp.print();
-        }else{
+        }else if(strConst!=null) {
+            strConst.print();
+        } else{
             leftBrace.print();
             if(firstConstExp!=null){
                 firstConstExp.print();

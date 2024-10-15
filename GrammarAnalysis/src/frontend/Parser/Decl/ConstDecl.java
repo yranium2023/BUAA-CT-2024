@@ -43,7 +43,7 @@ public class ConstDecl {
             constDecl.constDefs.add(ConstDef.getInstance().parseConstDef());
             token=Global.parser.preReadToken();
         }
-        constDecl.semicn=Global.parser.match(LexType.COMMA);
+        constDecl.semicn=Global.parser.match(LexType.SEMICN);
         return constDecl;
     }
     public void print() throws IOException{

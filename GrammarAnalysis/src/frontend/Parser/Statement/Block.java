@@ -27,7 +27,7 @@ public class Block {
     public Block parseBlock(){
         Block block=new Block();
         block.leftBrace= Global.parser.match(LexType.LBRACE);
-        while(!Global.parser.preReadToken().equals(LexType.RBRACE)){
+        while(!Global.parser.preReadToken().getType().equals(LexType.RBRACE)){
             block.blockItems.add(BlockItem.getInstance().parseBlockItem());
         }
         block.rightBrace=Global.parser.match(LexType.RBRACE);
@@ -35,9 +35,11 @@ public class Block {
     }
     public void print() throws IOException {
         leftBrace.print();
+//        System.out.println(blockItems.size());
         for(int i=0;i<blockItems.size();i++){
             blockItems.get(i).print();
         }
+        rightBrace.print();
         Global.parser.out.write(name+"\n");
     }
 }

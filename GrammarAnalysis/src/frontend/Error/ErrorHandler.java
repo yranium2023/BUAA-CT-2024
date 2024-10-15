@@ -2,8 +2,7 @@ package frontend.Error;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author 吴鹄远
@@ -27,6 +26,7 @@ public class ErrorHandler {
     }
 
     public void printErr(BufferedWriter stderr) throws IOException {
+        Collections.sort(errorList, Comparator.comparingInt(Error::getLineNum));
         for(Error error:errorList){
             stderr.write(error.toString());
         }

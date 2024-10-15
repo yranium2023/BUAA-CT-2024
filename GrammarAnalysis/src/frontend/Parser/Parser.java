@@ -98,7 +98,7 @@ public class Parser {
             ErrorHandler.getInstance().addError(new Error(ErrorType.MISSING_R_BACKET, now.getLineNum()));
             return new Token(now.getLineNum(),LexType.RBRACK);
         }else{
-            System.out.println("EXPECT "+lexType+" at line "+now.getLineNum());
+            System.out.println("EXPECT "+lexType+" AT LINE "+now.getLineNum()+", BUT GET "+next.getType());
             return null;
         }
     }
@@ -113,8 +113,9 @@ public class Parser {
     }
 
     public int getAssignIndex(){
-        int assign=index;
-        for(int i=index;i<tokenList.size()&&tokenList.get(i).getLineNum()==tokenList.get(index).getLineNum();i++){
+        int assign=index+1;
+        for(int i=index+1;i<tokenList.size()&&tokenList.get(i).getLineNum()==tokenList.get(index+1).getLineNum();i++){
+//            System.out.println(tokenList.get(i));
             if(tokenList.get(i).getType().equals(LexType.ASSIGN)){
                 assign=i;
             }

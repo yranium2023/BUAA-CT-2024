@@ -14,26 +14,26 @@ import java.io.IOException;
  */
 public class BType {
     private static final String name = "<BType>";
-    private Token token;
-    private static BType instance=new BType(null);
+    private Token token=null;
+    private static BType instance=new BType();
 
     public static BType getInstance() {
         return instance;
     }
 
-    private BType(Token token) {
-        this.token = token;
+    private BType() {
     }
     public BType parseBtype()  {
-        Token bType= Global.parser.getNextToken();
-        if(bType.getType().equals(LexType.INTTK)
-                ||bType.getType().equals(LexType.CHARTK)){
-            return new BType(bType);
+        BType bType=new BType();
+        Token token1= Global.parser.getNextToken();
+        if(token1.getType().equals(LexType.INTTK)
+                ||token1.getType().equals(LexType.CHARTK)){
+            bType.token=token1;
         }else{
             Global.parser.unReadPrevToken();
             System.out.println("ERROR: EXPECT INTTK OR CHARTK");
-            return null;
         }
+        return bType;
     }
     public void print() throws IOException{
         token.print();

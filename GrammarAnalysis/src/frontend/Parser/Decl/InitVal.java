@@ -17,7 +17,7 @@ import java.util.List;
  * @date 2024/10/9 21:11
  */
 public class InitVal {
-    private static final String name="InitVal";
+    private static final String name="<InitVal>";
     private Exp exp=null;
     private Token leftBrace=null;
     private Exp firstExp=null;

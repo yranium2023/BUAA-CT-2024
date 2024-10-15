@@ -6,6 +6,8 @@ import frontend.Lexer.Token;
 import frontend.Parser.Decl.BType;
 import frontend.Parser.Statement.Block;
 
+import java.io.IOException;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -14,6 +16,7 @@ import frontend.Parser.Statement.Block;
  * @date 2024/10/9 21:12
  */
 public class FuncFParam {
+    private static final String name="<FuncFParam>";
     private BType bType=null;
     private Token ident=null;
     private Token leftBracket=null;
@@ -34,5 +37,14 @@ public class FuncFParam {
             funcFParam.rightBracket=Global.parser.match(LexType.RBRACK);
         }
         return funcFParam;
+    }
+    public void print() throws IOException {
+        bType.print();
+        ident.print();
+        if(leftBracket!=null){
+            leftBracket.print();
+            rightBracket.print();
+        }
+        Global.parser.out.write(name+"\n");
     }
 }

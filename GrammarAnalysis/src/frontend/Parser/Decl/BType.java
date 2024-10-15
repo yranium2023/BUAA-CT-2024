@@ -13,7 +13,7 @@ import java.io.IOException;
  * @date 2024/10/9 21:10
  */
 public class BType {
-    private final String name = "<BType>";
+    private static final String name = "<BType>";
     private Token token;
     private static BType instance=new BType(null);
 
@@ -34,5 +34,8 @@ public class BType {
             System.out.println("ERROR: EXPECT INTTK OR CHARTK");
             return null;
         }
+    }
+    public void print() throws IOException{
+        token.print();
     }
 }

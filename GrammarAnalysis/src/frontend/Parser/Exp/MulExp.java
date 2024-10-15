@@ -4,8 +4,7 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 /**
  * @author 吴鹄远
@@ -15,8 +14,9 @@ import java.util.List;
  * @date 2024/10/9 21:14
  */
 public class MulExp {
+    private static final String name="<MulExp>";
     private static MulExp instance=new MulExp();
-    private UnaryExp firstUnaryExp=null;
+    private UnaryExp unaryExp =null;
     private Token operator=null;
     private MulExp mulExp=null;
     private MulExp(){
@@ -27,7 +27,7 @@ public class MulExp {
     }
     public MulExp parseMulExp(){
         MulExp mulExp1=new MulExp();
-        mulExp1.firstUnaryExp=UnaryExp.getInstance().parseUnaryExp();
+        mulExp1.unaryExp =UnaryExp.getInstance().parseUnaryExp();
         Token token= Global.parser.preReadToken();
         if (token.getType().equals(LexType.MULT)
         || token.getType().equals(LexType.DIV)
@@ -36,5 +36,13 @@ public class MulExp {
             mulExp1.mulExp=MulExp.getInstance().parseMulExp();
         }
         return mulExp1;
+    }
+    public void print() throws IOException {
+        unaryExp.print();
+        Global.parser.out.write(name+"\n");
+        if(operator!=null){
+            operator.print();
+            mulExp.print();
+        }
     }
 }

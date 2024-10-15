@@ -4,6 +4,9 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 import frontend.Parser.Parser;
+import frontend.Parser.Statement.ForStmt;
+
+import java.io.IOException;
 
 /**
  * @author 吴鹄远
@@ -12,6 +15,7 @@ import frontend.Parser.Parser;
  * @date 2024/10/9 21:10
  */
 public class Decl {
+    private static final String name="<Decl";
     private ConstDecl constDecl;
     private VarDecl varDecl;
     private Decl(){
@@ -31,6 +35,13 @@ public class Decl {
             decl.varDecl=VarDecl.getInstance().parseVarDecl();
         }
         return decl;
+    }
+    public void print() throws IOException {
+        if(constDecl!=null){
+            constDecl.print();
+        }else{
+            varDecl.print();
+        }
     }
 
 }

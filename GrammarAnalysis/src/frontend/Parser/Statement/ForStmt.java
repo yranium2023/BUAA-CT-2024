@@ -6,6 +6,8 @@ import frontend.Lexer.Token;
 import frontend.Parser.Exp.Exp;
 import frontend.Parser.Exp.LVal;
 
+import java.io.IOException;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -13,6 +15,7 @@ import frontend.Parser.Exp.LVal;
  * @date 2024/10/9 21:13
  */
 public class ForStmt {
+    private static final String name="<ForStmt>";
     private LVal lVal=null;
     private Token assign=null;
     private Exp exp=null;
@@ -27,5 +30,11 @@ public class ForStmt {
         forStmt.assign= Global.parser.match(LexType.ASSIGN);
         forStmt.exp=Exp.getInstance().parseExp();
         return forStmt;
+    }
+    public void print() throws IOException {
+        lVal.print();
+        assign.print();
+        exp.print();
+        Global.parser.out.write(name+"\n");
     }
 }

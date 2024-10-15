@@ -1,13 +1,12 @@
 package frontend.Parser.Exp;
 
-import frontend.Error.Error;
-import frontend.Error.ErrorHandler;
-import frontend.Error.ErrorType;
 import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 import frontend.Parser.Func.FuncRParams;
 import frontend.Parser.Parser;
+
+import java.io.IOException;
 
 /**
  * @author 吴鹄远
@@ -17,8 +16,9 @@ import frontend.Parser.Parser;
  * @date 2024/10/9 21:14
  */
 public class UnaryExp {
+    private static final String name="<PrimaryExp>";
     private PrimaryExp primaryExp = null;
-    private Token Ident = null;
+    private Token ident = null;
     private Token leftParent = null;
     private FuncRParams funcRParams = null;
     private Token rightParent =null;
@@ -57,7 +57,7 @@ public class UnaryExp {
         Token second= Global.parser.getNextToken();
         Global.parser.unReadToken(2);
         if(isIdentFirst(first,second)){
-            unaryExp1.Ident=Global.parser.getNextToken();
+            unaryExp1.ident =Global.parser.getNextToken();
             unaryExp1.leftParent =Global.parser.getNextToken();
             Token token=Global.parser.getNextToken();
             Global.parser.unReadPrevToken();
@@ -75,7 +75,22 @@ public class UnaryExp {
         }
         return unaryExp1;
     }
-
+    public void print() throws IOException {
+        if(primaryExp!=null){
+            primaryExp.print();
+        }else if(ident!=null){
+            ident.print();
+            leftParent.print();
+            if(funcRParams!=null){
+                funcRParams.print();
+            }
+            rightParent.print();
+        }else{
+            unaryOp.print();
+            unaryExp.print();
+        }
+        Global.parser.out.write(name+"\n");
+    }
 
 
 

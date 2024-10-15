@@ -6,6 +6,7 @@ import frontend.Lexer.Token;
 import frontend.Parser.Exp.Exp;
 import frontend.Parser.Parser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * @date 2024/10/9 21:11
  */
 public class InitVal {
+    private static final String name="InitVal";
     private Exp exp=null;
     private Token leftBrace=null;
     private Exp firstExp=null;
@@ -52,5 +54,23 @@ public class InitVal {
             initVal.exp=Exp.getInstance().parseExp();
         }
         return initVal;
+    }
+    public void print() throws IOException {
+        if(exp!=null){
+            exp.print();
+        }else if(strConst!=null){
+            strConst.print();
+        }else{
+            leftBrace.print();
+            if(firstExp!=null){
+                firstExp.print();
+                for(int i=0;i<commas.size();i++){
+                    commas.get(i).print();
+                    exps.get(i).print();
+                }
+            }
+            rightBrace.print();
+        }
+        Global.parser.out.write(name+"\n");
     }
 }

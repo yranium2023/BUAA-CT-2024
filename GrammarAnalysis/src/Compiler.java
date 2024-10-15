@@ -24,9 +24,11 @@ public class Compiler {
         lexer.file2lex();
         lexer.output();
         Global.parser = new Parser(lexer,stdPar);
+        Global.parser.toParser();
         ErrorHandler.getInstance().printErr(stderr);
         stdin.close();
         stdout.close();
         stderr.close();
+        stdPar.close();
     }
 }

@@ -5,6 +5,8 @@ import frontend.Lexer.LexType;
 import frontend.Lexer.Lexer;
 import frontend.Lexer.Token;
 
+import java.io.IOException;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -13,6 +15,7 @@ import frontend.Lexer.Token;
  * @date 2024/10/9 21:14
  */
 public class PrimaryExp {
+    private static final String name="<PrimaryExp>";
     private Token leftParent=null;
     private Exp exp=null;
     private Token rightParent=null;
@@ -46,5 +49,19 @@ public class PrimaryExp {
             primaryExp.lVal=LVal.getInstance().parseLVal();
         }
         return primaryExp;
+    }
+    public void print() throws IOException {
+        if(lVal!=null){
+            lVal.print();
+        }else if(number!=null){
+            number.print();
+        }else if(character!=null){
+            character.print();
+        }else{
+            leftParent.print();
+            exp.print();
+            rightParent.print();
+        }
+        Global.parser.out.write(name+"\n");
     }
 }

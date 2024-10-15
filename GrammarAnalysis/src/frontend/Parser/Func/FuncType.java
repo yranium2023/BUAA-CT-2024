@@ -4,6 +4,8 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
+import java.io.IOException;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -11,6 +13,7 @@ import frontend.Lexer.Token;
  * @date 2024/10/9 21:12
  */
 public class FuncType {
+    private static final String name="<FuncType>";
     private Token type=null;
     private FuncType(){
 
@@ -30,6 +33,10 @@ public class FuncType {
             System.out.println("Error: EXPECT FUNCTYPE");
         }
         return funcType;
+    }
+    public void print() throws IOException {
+        type.print();
+        Global.parser.out.write(name+"\n");
     }
 
 }

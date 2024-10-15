@@ -4,6 +4,8 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
+import java.io.IOException;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -12,6 +14,7 @@ import frontend.Lexer.Token;
  * @date 2024/10/9 21:15
  */
 public class LAndExp {
+    private static final String name="<LAndExp>";
     private EqExp eqExp=null;
     private Token operator =null;
     private LAndExp lAndExp=null;
@@ -29,5 +32,13 @@ public class LAndExp {
             lAndExp1.lAndExp=LAndExp.getInstance().parseLAndExp();
         }
         return lAndExp1;
+    }
+    public void print() throws IOException {
+        eqExp.print();
+        Global.parser.out.write(name+"\n");
+        if(operator!=null){
+            operator.print();
+            lAndExp.print();
+        }
     }
 }

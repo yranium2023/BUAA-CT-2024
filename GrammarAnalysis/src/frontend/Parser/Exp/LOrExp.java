@@ -4,6 +4,8 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
+import java.io.IOException;
+
 /**
  * @author 吴鹄远
  * @Description 逻辑或表达式 LOrExp → LAndExp | LOrExp '||' LAndExp
@@ -11,6 +13,7 @@ import frontend.Lexer.Token;
  * @date 2024/10/9 21:15
  */
 public class LOrExp {
+    private static final String name="<LOrExp>";
     private LAndExp lAndExp=null;
     private Token operator =null;
     private LOrExp lOrExp=null;
@@ -28,5 +31,13 @@ public class LOrExp {
             lOrExp1.lOrExp=LOrExp.getInstance().parseLOrExp();
         }
         return lOrExp1;
+    }
+    public void print() throws IOException {
+        lAndExp.print();
+        Global.parser.out.write(name+"\n");
+        if(operator!=null){
+            operator.print();
+            lOrExp.print();
+        }
     }
 }

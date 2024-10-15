@@ -5,6 +5,8 @@ import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 import frontend.Parser.Exp.ConstExp;
 
+import java.io.IOException;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -14,6 +16,7 @@ import frontend.Parser.Exp.ConstExp;
  * @date 2024/10/9 21:11
  */
 public class VarDef {
+    private static final String name="<VarDef>";
     private Token ident=null;
     private Token leftBracket=null;
     private ConstExp constExp=null;
@@ -43,5 +46,19 @@ public class VarDef {
             varDef.initVal=InitVal.getInstance().parseInitVal();
         }
         return varDef;
+    }
+    public void print() throws IOException {
+        ident.print();
+        if(leftBracket!=null){
+            leftBracket.print();
+            constExp.print();
+            rightBracket.print();
+        }
+        if(assign!=null){
+            assign.print();
+            initVal.print();
+        }
+        Global.parser.out.write(name+"\n");
+
     }
 }

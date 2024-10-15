@@ -1,5 +1,9 @@
 package frontend.Lexer;
 
+import frontend.Global;
+
+import java.io.IOException;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -60,5 +64,8 @@ public class Token {
         } else {
             return type + " " + type.getSymbol() + "\n";
         }
+    }
+    public void print() throws IOException{
+        Global.parser.out.write(this.toString());
     }
 }

@@ -4,6 +4,7 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @date 2024/10/9 21:12
  */
 public class Block {
+    private static final String name="<Block>";
     private Token leftBrace=null;
     private List<BlockItem> blockItems=new ArrayList<>();
     private Token rightBrace=null;
@@ -30,5 +32,12 @@ public class Block {
         }
         block.rightBrace=Global.parser.match(LexType.RBRACE);
         return block;
+    }
+    public void print() throws IOException {
+        leftBrace.print();
+        for(int i=0;i<blockItems.size();i++){
+            blockItems.get(i).print();
+        }
+        Global.parser.out.write(name+"\n");
     }
 }

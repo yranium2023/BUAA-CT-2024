@@ -4,8 +4,7 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 /**
  * @author 吴鹄远
@@ -15,7 +14,8 @@ import java.util.List;
  * @date 2024/10/9 21:13
  */
 public class LVal {
-    private Token Ident=null;
+    private static final String name="<LVal>";
+    private Token ident =null;
     private Token leftBracket=null;
     private Exp exp=null;
     private Token rightBracket=null;
@@ -25,7 +25,7 @@ public class LVal {
     }
     public LVal parseLVal(){
         LVal lVal=new LVal();
-        lVal.Ident= Global.parser.match(LexType.IDENFR);
+        lVal.ident = Global.parser.match(LexType.IDENFR);
         Token token=Global.parser.getNextToken();
         Global.parser.unReadPrevToken();
         if (token.getType().equals(LexType.LBRACK)){
@@ -34,6 +34,15 @@ public class LVal {
             lVal.rightBracket=Global.parser.match(LexType.RBRACK);
         }
         return lVal;
+    }
+    public void print() throws IOException {
+        ident.print();
+        if(leftBracket!=null){
+            leftBracket.print();
+            exp.print();
+            rightBracket.print();
+        }
+        Global.parser.out.write(name+"\n");
     }
 
 }

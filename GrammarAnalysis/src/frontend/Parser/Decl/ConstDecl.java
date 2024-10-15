@@ -16,6 +16,7 @@ import java.util.List;
  * @date 2024/10/9 21:10
  */
 public class ConstDecl {
+    private static final String name="<ConstDecl>";
     private Token constTk=null; //"const"
     private BType bType=null; //BType
     private ConstDef firstConstDef=null;
@@ -44,6 +45,17 @@ public class ConstDecl {
         }
         constDecl.semicn=Global.parser.match(LexType.COMMA);
         return constDecl;
+    }
+    public void print() throws IOException{
+        constTk.print();
+        bType.print();
+        firstConstDef.print();
+        for(int i=0;i<commas.size();i++){
+            commas.get(i).print();
+            constDefs.get(i).print();
+        }
+        semicn.print();
+        Global.parser.out.write(name+"\n");
     }
 
 }

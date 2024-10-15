@@ -4,6 +4,7 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @date 2024/10/9 21:14
  */
 public class AddExp {
+    private static final String name="<AddExp>";
     private  MulExp firstMulExp=null;
     private Token operator=null;
     private AddExp addExp=null;
@@ -35,6 +37,14 @@ public class AddExp {
             addExp1.addExp=AddExp.getInstance().parseAddExp();
         }
         return addExp1;
+    }
+    public void print() throws IOException {
+        firstMulExp.print();
+        Global.parser.out.write(name+"\n");
+        if(operator!=null){
+            operator.print();
+            addExp.print();
+        }
     }
 
 

@@ -5,6 +5,7 @@ import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 import frontend.Parser.Exp.ConstExp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @date 2024/10/9 21:11
  */
 public class ConstInitVal {
+    private static final String name="<ConstInitVal>";
     private ConstExp constExp=null;
     private Token leftBrace=null; //'{'
     private ConstExp firstConstExp=null;
@@ -51,5 +53,21 @@ public class ConstInitVal {
             constInitVal.constExp=ConstExp.getInstance().parseConstExp();
         }
         return constInitVal;
+    }
+    public void print() throws IOException {
+        if(constExp!=null){
+            constExp.print();
+        }else{
+            leftBrace.print();
+            if(firstConstExp!=null){
+                firstConstExp.print();
+                for(int i=0;i<commas.size();i++){
+                    commas.get(i).print();
+                    constExps.get(i).print();
+                }
+            }
+            rightBrace.print();
+        }
+        Global.parser.out.write(name+"\n");
     }
 }

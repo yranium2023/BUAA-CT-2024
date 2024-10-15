@@ -5,6 +5,7 @@ import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 import frontend.Parser.Statement.Block;
 
+import java.io.IOException;
 
 
 /**
@@ -15,6 +16,7 @@ import frontend.Parser.Statement.Block;
  * @date 2024/10/9 21:12
  */
 public class FuncDef {
+    private static final String name="<FuncDef>";
     private FuncType funcType=null;
     private Token ident=null;
     private Token leftParent=null;
@@ -28,7 +30,7 @@ public class FuncDef {
     public static FuncDef getInstance(){
         return instance;
     }
-    private FuncDef parseFuncDef(){
+    public FuncDef parseFuncDef(){
         FuncDef funcDef=new FuncDef();
         funcDef.funcType=FuncType.getInstance().parseFuncType();
         funcDef.ident= Global.parser.match(LexType.IDENFR);
@@ -41,6 +43,17 @@ public class FuncDef {
         funcDef.rightParent=Global.parser.match(LexType.RPARENT);
         funcDef.block=Block.getInstance().parseBlock();
         return funcDef;
+    }
+    public void print() throws IOException {
+        funcType.print();
+        ident.print();
+        leftParent.print();
+        if(funcFParams!=null){
+            funcFParams.print();
+        }
+        rightParent.print();
+        block.print();
+        Global.parser.out.write(name+"\n");
     }
 
 }

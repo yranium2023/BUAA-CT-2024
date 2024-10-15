@@ -1,6 +1,9 @@
 package frontend.Parser.Exp;
 
+import frontend.Global;
 import frontend.Parser.Decl.ConstDef;
+
+import java.io.IOException;
 
 /**
  * @author 吴鹄远
@@ -8,6 +11,7 @@ import frontend.Parser.Decl.ConstDef;
  * @date 2024/10/9 21:15
  */
 public class ConstExp {
+    private static final String name="<ConstExp>";
     private AddExp addExp=null;
     private ConstExp(){
 
@@ -20,6 +24,11 @@ public class ConstExp {
         ConstExp constExp=new ConstExp();
         constExp.addExp=AddExp.getInstance().parseAddExp();
         return constExp;
+    }
+
+    public void print() throws IOException {
+        addExp.print();
+        Global.parser.out.write(name+"\n");
     }
 
 }

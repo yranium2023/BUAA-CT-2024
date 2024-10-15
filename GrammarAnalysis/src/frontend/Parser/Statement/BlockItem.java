@@ -6,6 +6,7 @@ import frontend.Lexer.Token;
 import frontend.Parser.Decl.Decl;
 
 import javax.sound.sampled.Port;
+import java.io.IOException;
 
 /**
  * @author 吴鹄远
@@ -14,6 +15,7 @@ import javax.sound.sampled.Port;
  * @date 2024/10/9 21:12
  */
 public class BlockItem {
+    private static final String name="<BlockItem>";
     private Decl decl=null;
     private Stmt stmt=null;
     private BlockItem(){}
@@ -32,5 +34,12 @@ public class BlockItem {
             blockItem.stmt=Stmt.getInstance().parseStmt();
         }
         return  blockItem;
+    }
+    public void print() throws IOException {
+        if(decl!=null){
+            decl.print();
+        }else{
+            stmt.print();
+        }
     }
 }

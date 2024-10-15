@@ -4,6 +4,7 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @date 2024/10/9 21:11
  */
 public class VarDecl {
+    private static final String name="<VarDecl>";
     private BType bType;
     private VarDef firstVarDef;
     private List<Token> commas=new ArrayList<>();
@@ -38,5 +40,15 @@ public class VarDecl {
         }
         varDecl.semicn=Global.parser.match(LexType.SEMICN);
         return varDecl;
+    }
+    public void print() throws IOException {
+        bType.print();
+        firstVarDef.print();
+        for(int i=0;i<commas.size();i++){
+            commas.get(i).print();
+            varDefs.get(i).print();
+        }
+        semicn.print();
+        Global.parser.out.write(name+"\n");
     }
 }

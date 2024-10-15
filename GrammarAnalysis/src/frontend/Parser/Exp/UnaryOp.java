@@ -4,6 +4,8 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
+import java.io.IOException;
+
 /**
  * @author 吴鹄远
  * @Description
@@ -11,6 +13,7 @@ import frontend.Lexer.Token;
  * @date 2024/10/9 21:14
  */
 public class UnaryOp {
+    private static final String name="<UnaryOp>";
     private Token op=null;
     private static UnaryOp instance=new UnaryOp();
     private UnaryOp(){
@@ -29,5 +32,9 @@ public class UnaryOp {
         }
         unaryOp.op=token;
         return unaryOp;
+    }
+    public void print() throws IOException {
+        op.print();
+        Global.parser.out.write(name+"\n");
     }
 }

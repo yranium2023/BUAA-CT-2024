@@ -1,9 +1,12 @@
 package frontend.Parser;
 
+import frontend.Global;
+import frontend.Lexer.LexType;
 import frontend.Parser.Decl.Decl;
 import frontend.Parser.Func.FuncDef;
 import frontend.Parser.Func.MainFuncDef;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,28 +17,38 @@ import java.util.List;
  * @date 2024/10/9 20:42
  */
 public class CompUnit {
-    public final String name="<CompUnit>";
+    private static final String name="<CompUnit>";
 //    public final boolean isTerminal=false;
-    public List<Decl> decls;
-    public List<FuncDef> funcDefs;
-    public MainFuncDef mainFuncDef;
-    public CompUnit(){
-        decls=new ArrayList<>();
-        funcDefs=new ArrayList<>();
-        parseDecls();
-        parseFuncDefs();
-        parseMainFuncDef();
+    private List<Decl> decls=new ArrayList<>();
+    private List<FuncDef> funcDefs=new ArrayList<>();
+    private MainFuncDef mainFuncDef=null;
+    private CompUnit(){
     }
-    public void parseDecls(){
-
+    private static CompUnit instance=new CompUnit();
+    public static CompUnit getInstance(){
+        return instance;
     }
-
-    public void parseFuncDefs(){
-
+    public CompUnit parseCompUnit(){
+        CompUnit compUnit=new CompUnit();
+        while (!Global.parser.preReadToken(2).getType().equals(LexType.MAINTK)
+        && !Global.parser.preReadToken(3).getType().equals(LexType.LPARENT)){
+            compUnit.decls.add(Decl.getInstance().parseDecl());
+        }
+        while (!Global.parser.preReadToken(2).getType().equals(LexType.MAINTK)){
+            compUnit.funcDefs.add(FuncDef.getInstance().parseFuncDef());
+        }
+        compUnit.mainFuncDef=MainFuncDef.getInstance().parseMainFuncDef();
+        return compUnit;
     }
-
-    public void parseMainFuncDef(){
-
+    public void print() throws IOException {
+        for(int i=0;i<decls.size();i++){
+            decls.get(i).print();
+        }
+        for(int i=0;i<funcDefs.size();i++){
+            funcDefs.get(i).print();
+        }
+        mainFuncDef.print();
+        Global.parser.out.write(name+"\n");
     }
 
 }

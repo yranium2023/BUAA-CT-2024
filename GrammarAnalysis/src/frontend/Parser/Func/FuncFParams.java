@@ -4,6 +4,7 @@ import frontend.Global;
 import frontend.Lexer.LexType;
 import frontend.Lexer.Token;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @date 2024/10/9 21:12
  */
 public class FuncFParams {
+    private static final String name="<FuncFParams>";
     private FuncFParam firstFuncFParam=null;
     private List<Token> commas=new ArrayList<>();
     private List<FuncFParam> funcFParams=new ArrayList<>();
@@ -32,5 +34,13 @@ public class FuncFParams {
             funcFParams1.funcFParams.add(FuncFParam.getInstance().parseFuncFParam());
         }
         return funcFParams1;
+    }
+    public void print() throws IOException {
+        firstFuncFParam.print();
+        for(int i=0;i<commas.size();i++){
+            commas.get(i).print();
+            funcFParams.get(i).print();
+        }
+        Global.parser.out.write(name+"\n");
     }
 }

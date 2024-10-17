@@ -125,6 +125,9 @@ public class Parser {
     public int getIndex(){
         return index;
     }
+    public void setIndex(int index){
+        this.index=index;
+    }
     public void toParser() throws IOException {
         CompUnit compUnit=CompUnit.getInstance().parseCompUnit();
         compUnit.print();

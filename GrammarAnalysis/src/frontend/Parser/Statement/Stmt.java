@@ -137,12 +137,11 @@ public class Stmt {
             stmt.semicn=Global.parser.match(LexType.SEMICN);
             stmt.type=StmtType.Return;
         }else{
-            int index=Global.parser.getIndex()+1;
-//            System.out.println(index);
-            int assign=Global.parser.getAssignIndex();
-//            System.out.println(assign);
-            if(assign>index){
-                stmt.lVal=LVal.getInstance().parseLVal();
+            int index=Global.parser.getIndex();
+            LVal tempLval=LVal.getInstance().parseLVal();
+            if(Global.parser.preReadToken().getType().equals(LexType.ASSIGN)){
+                //说明左值存在
+                stmt.lVal=tempLval;
                 stmt.assignToken=Global.parser.match(LexType.ASSIGN);
                 token=Global.parser.preReadToken();
                 if(token.getType().equals(LexType.GETINTTK)){
@@ -166,6 +165,8 @@ public class Stmt {
                     stmt.type=StmtType.LValAssignExp;
                 }
             }else{
+                //回溯到之前的index
+                Global.parser.setIndex(index);
                 //[Exp] ';'
                 token=Global.parser.preReadToken();
                 if(Parser.isExp(token)){
@@ -173,8 +174,46 @@ public class Stmt {
                 }
                 stmt.semicn=Global.parser.match(LexType.SEMICN);
                 stmt.type=StmtType.Exp;
+
             }
         }
+//        else{
+//            int index=Global.parser.getIndex()+1;
+//            int assign=Global.parser.getAssignIndex();
+//            if(assign>index){
+//                stmt.lVal=LVal.getInstance().parseLVal();
+//                stmt.assignToken=Global.parser.match(LexType.ASSIGN);
+//                token=Global.parser.preReadToken();
+//                if(token.getType().equals(LexType.GETINTTK)){
+//                    // LVal '=' 'getint''('')'';'
+//                    stmt.getIntToken=Global.parser.match(LexType.GETINTTK);
+//                    stmt.leftParent=Global.parser.match(LexType.LPARENT);
+//                    stmt.rightParent=Global.parser.match(LexType.RPARENT);
+//                    stmt.semicn=Global.parser.match(LexType.SEMICN);
+//                    stmt.type=StmtType.LvalAssignGetint;
+//                }else if(token.getType().equals(LexType.GETCHARTK)){
+//                    // LVal '=' 'getchar''('')'';'
+//                    stmt.getCharToken=Global.parser.match(LexType.GETCHARTK);
+//                    stmt.leftParent=Global.parser.match(LexType.LPARENT);
+//                    stmt.rightParent=Global.parser.match(LexType.RPARENT);
+//                    stmt.semicn=Global.parser.match(LexType.SEMICN);
+//                    stmt.type=StmtType.LvalAssignGetchar;
+//                }else{
+//                    // LVal '=' Exp ';'
+//                    stmt.exp=Exp.getInstance().parseExp();
+//                    stmt.semicn=Global.parser.match(LexType.SEMICN);
+//                    stmt.type=StmtType.LValAssignExp;
+//                }
+//            }else{
+//                //[Exp] ';'
+//                token=Global.parser.preReadToken();
+//                if(Parser.isExp(token)){
+//                    stmt.exp=Exp.getInstance().parseExp();
+//                }
+//                stmt.semicn=Global.parser.match(LexType.SEMICN);
+//                stmt.type=StmtType.Exp;
+//            }
+//        }
         return  stmt;
     }
     public void print() throws IOException {

@@ -4,3 +4,7 @@ BUAA-CT-2024.iml
 GrammarAnalysis/src/*.zip
 /out/
 *.txt
+error.txt
+lexer.txt
+parser.txt
+testfile.txt
